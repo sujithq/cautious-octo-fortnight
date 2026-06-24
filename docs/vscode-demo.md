@@ -2,6 +2,7 @@
 
 > **Target audience:** Developers who want to see GitHub Copilot's new agentic features in VS Code introduced at Microsoft Build 2026.
 > **Sample project:** The `.NET 10` TodoApi in `src/TodoApi` of this repository.
+> **Changelog sources:** [VS Code May 2026 releases](https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/) · [VS Code 1.125 release notes](https://code.visualstudio.com/updates) · [VS Code March 2026 releases](https://github.blog/changelog/2026-04-08-github-copilot-in-visual-studio-code-march-releases/)
 
 ---
 
@@ -164,6 +165,103 @@
 
 ---
 
+## Demo 7 — Plan Agent (Plan before you code)
+
+**What it shows:** Collaborate with Copilot on a written implementation plan _before_ any code is generated — introduced in the June 2026 changelog.
+
+### Steps
+
+1. Open Copilot Chat and type `/plan`:
+
+   ```
+   /plan Add a pagination feature to GET /todos — support ?page= and ?pageSize= query params with defaults of 1 and 20.
+   ```
+
+2. Copilot responds with a Markdown plan saved as a file (e.g. `.github/plans/pagination.md`):
+
+   ```markdown
+   ## Plan: Pagination for GET /todos
+
+   ### Approach
+   - Read `page` and `pageSize` query params; default 1 and 20 respectively.
+   - Validate: page ≥ 1, pageSize 1–100.
+   - Return a paginated envelope: `{ items, page, pageSize, total }`.
+
+   ### Files to change
+   - `src/TodoApi/Program.cs` — update MapGet handler.
+   - `src/TodoApi.Tests/TodoApiTests.cs` — add pagination tests.
+   ```
+
+3. Review the plan in the editor. Edit any step — Copilot will adjust subsequent steps automatically.
+4. When satisfied, click **Implement Plan** (or type `/implement`) — Copilot executes the steps sequentially.
+5. Accept or reject file changes using the inline diff toolbar.
+
+> **Key point:** Planning before coding reduces back-and-forth and gives you an auditable record of intent.
+
+---
+
+## Demo 8 — Agent Skills Management
+
+**What it shows:** The new Skills panel lets you discover, enable, disable, edit, and navigate all Copilot agent skills in the workspace.
+
+### Steps
+
+1. Open the Command Palette → **`GitHub Copilot: Open Agent Skills`**.
+2. Browse the skills list — e.g. `runTests`, `openBrowser`, `createPullRequest`, `searchCode`.
+3. Click a skill to see its definition (a Markdown file with YAML frontmatter).
+4. Disable a skill you don't want agents to use (e.g. `deleteFile`) — toggle it off.
+5. Click **+ New Skill** → enter a name and description → VS Code creates a `.github/agents/<skill>.md` stub.
+6. Re-open Agent Mode and run a task — the agent only uses the skills you have enabled.
+
+---
+
+## Demo 9 — Context Usage Visualisation
+
+**What it shows:** A live indicator of how much of the context window is consumed by the current conversation, with a one-click summarisation to recover space.
+
+### Steps
+
+1. Open Copilot Chat and have an extended conversation (paste large code snippets, ask multi-step questions).
+2. Watch the context-usage bar at the top of the chat panel fill up.
+3. When it reaches ~80 %, a warning badge appears: _"Context window is almost full."_
+4. Click **Summarise conversation** — Copilot condenses earlier messages into a compact summary, freeing context budget.
+5. Continue the conversation — the bar resets to a lower level.
+6. Hover the bar at any time to see a tooltip: tokens used / total tokens available.
+
+---
+
+## Demo 10 — Language Models Editor (BYOK)
+
+**What it shows:** Install additional model providers or use your own API key (BYOK) directly from VS Code, without leaving the editor. Introduced in VS Code 1.125.
+
+### Steps
+
+1. Open the Command Palette → **`Language Models: Open Language Models Editor`**.
+2. The editor lists installed model providers (GitHub, Azure OpenAI, Ollama …).
+3. Click **+ Install Provider** → browse the marketplace panel on the right.
+4. Select **Azure OpenAI** → enter your endpoint URL and API key → click **Save**.
+5. In Copilot Chat, click the model picker → you now see your Azure model alongside GitHub-hosted models.
+6. Switch to your Azure model and run a prompt — responses come directly from your deployment.
+
+> **Key point:** BYOK lets enterprise teams keep data inside their own Azure tenancy while using the full Copilot UX.
+
+---
+
+## Demo 11 — Multi-file Change Diff & Accept/Reject
+
+**What it shows:** After an agent edits multiple files, review all changes in a consolidated diff before accepting.
+
+### Steps
+
+1. Run an agent task that touches several files (e.g. Demo 1 — adding the `DueDate` field).
+2. When the agent finishes, the **Multi-file Diff** panel opens automatically.
+3. The panel shows a tree of changed files with line counts.
+4. Review each file's diff inline; use the hunk-level **Accept** / **Reject** buttons to cherry-pick changes.
+5. Use the top-level **Accept All** or **Undo All** buttons for bulk actions.
+6. Use **Ctrl+Z** to undo the last accepted hunk if you change your mind.
+
+---
+
 ## Tips
 
 - Use `/fix` in chat to auto-fix compiler errors highlighted in the editor.
@@ -171,3 +269,7 @@
 - Use `/explain` to get a plain-English explanation of any selected code block.
 - Press `Ctrl+I` to open **inline chat** directly in the editor without leaving your context.
 - Chronicle your session: type `/chronicle` in chat to get a summary of what Copilot changed today.
+- Type `/plan` before a complex task to align on approach before generating code.
+- Open the **Skills** panel to control exactly which capabilities agents have.
+- Monitor the context-usage bar in long sessions and summarise proactively to avoid hitting the limit.
+

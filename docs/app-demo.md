@@ -2,6 +2,7 @@
 
 > **Target audience:** Developers who want to explore the new **agent-native desktop experience** introduced at Microsoft Build 2026.
 > **Sample project:** The `.NET 10` TodoApi in `src/TodoApi` of this repository.
+> **Changelog sources:** [Copilot App GA (Jun 17 2026)](https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/) · [Expanded technical preview (Jun 2 2026)](https://github.blog/changelog/2026-06-02-expanded-technical-preview-availability-for-the-github-copilot-app/)
 
 ---
 
@@ -203,6 +204,72 @@
 
 ---
 
+## Demo 8 — Cloud Automations (GA feature)
+
+**What it shows:** Schedule recurring agent work to run in GitHub's cloud on a timed basis — independent of your local machine. Added at GA (June 17 2026).
+
+### Steps
+
+1. In the Copilot App, navigate to **Settings → Cloud Automations**.
+2. Click **[+ New Automation]** and configure:
+   - **Repository:** `cautious-octo-fortnight`
+   - **Schedule:** Every Monday at 09:00 UTC
+   - **Task:**
+     ```
+     Run dotnet test on the repository.
+     If any tests fail, open a GitHub Issue titled "Automated test failure — {date}"
+     with the failing test names and stack traces in the body.
+     ```
+3. Click **Save**. The automation is stored in GitHub's cloud — it runs even if your machine is off.
+4. Trigger a manual run immediately by clicking **▶ Run Now** to verify the setup.
+5. Check the **Automation Runs** tab to see the log of previous executions and their outcomes.
+6. View any Issues created by the automation directly from the My Work dashboard.
+
+> **Key point:** Cloud Automations turn recurring chores (nightly test runs, weekly security scans) into zero-maintenance scheduled agents.
+
+---
+
+## Demo 9 — BYOK Models (Bring Your Own Key)
+
+**What it shows:** Run Copilot agent sessions against your own model provider (OpenAI, Azure OpenAI, Anthropic) so data stays in your tenancy. Added at GA (June 17 2026).
+
+### Steps
+
+1. Go to **Settings → Models → Add Provider**.
+2. Choose **Azure OpenAI** and fill in:
+   - **Endpoint:** `https://my-company.openai.azure.com/`
+   - **API Key:** _(your key)_
+   - **Deployment:** `gpt-5-turbo`
+3. Click **Test Connection** — the App verifies the credentials.
+4. Click **Save** — your provider appears in the model picker.
+5. Start a new session on `cautious-octo-fortnight` and select **my-company / gpt-5-turbo** from the model dropdown.
+6. Run a prompt — the App routes inference to your Azure deployment. No tokens leave your tenancy.
+7. Switch back to a GitHub-hosted model at any time via the picker.
+
+> **Key point:** Enterprises with strict data-residency requirements can now use the full Copilot UX with their own models.
+
+---
+
+## Demo 10 — Plugin Marketplace
+
+**What it shows:** Browse, install, and use Canvas extensions and custom skills from the plugin marketplace. Added at GA (June 17 2026).
+
+### Steps
+
+1. In the Copilot App, open **Settings → Extensions → Marketplace**.
+2. Browse categories: **Canvas extensions**, **Skills**, **MCP Servers**, **Integrations**.
+3. Search for `Jira` → click **Install** on the official Jira plugin.
+4. The plugin adds:
+   - A **Jira Canvas** type — create a Canvas that shows a live Jira board.
+   - A `jira` skill — agents can now create and update Jira tickets.
+5. Create a new session on `cautious-octo-fortnight` and open a Canvas → click **+ New Canvas → Jira Board**.
+6. Log in to your Jira instance when prompted.
+7. The Canvas shows your Jira sprint board — agents can move cards and create tickets as they complete tasks.
+
+> **Key point:** The marketplace makes the Copilot App extensible — your team's tools come to you, not the other way round.
+
+---
+
 ## Architecture summary
 
 ```
@@ -213,6 +280,11 @@
 │  │  dashboard   │  │ workspace │  │  engine      │  │
 │  └──────────────┘  └───────────┘  └──────────────┘  │
 │                                                      │
+│  ┌────────────────────────────────────────────────┐  │
+│  │            Plugin Marketplace                  │  │
+│  │  Canvas extensions · Skills · MCP · Integrations│ │
+│  └────────────────────────────────────────────────┘  │
+│                                                      │
 │  Session A (worktree-a)   Session B (worktree-b)     │
 │  └─ Local agent           └─ Background agent        │
 │         │                         │                  │
@@ -222,7 +294,7 @@
 └─────────────────────────────────────────────────────┘
          │                      │
     GitHub.com              GitHub Actions
-    (Issues / PRs)          (Cloud agents)
+    (Issues / PRs)      Cloud Automations / Cloud agents
 ```
 
 ---
@@ -234,3 +306,7 @@
 - **Sandbox mode** — toggle **Sandbox** on a session to run generated code in a cloud container before it touches your local machine.
 - **Session export** — export a Canvas as a Markdown file to share the plan with your team.
 - **MCP integration** — connect Model Context Protocol servers in **Settings → MCP** to give agents access to Jira, Slack, Datadog, and more.
+- **Canvas persists** — Canvas state is preserved across app restarts and reconnects, so long-running sessions pick up exactly where they left off.
+- **Cloud Automations** — schedule recurring tasks (nightly tests, weekly security scans) that run on GitHub's infrastructure without your machine being on.
+- **BYOK** — use your own Azure / Anthropic / OpenAI key to keep all data inside your tenancy.
+

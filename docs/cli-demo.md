@@ -2,6 +2,7 @@
 
 > **Target audience:** Developers who live in the terminal and want to see Copilot CLI's new features from Microsoft Build 2026.
 > **Sample project:** The `.NET 10` TodoApi in `src/TodoApi` of this repository.
+> **Changelog source:** [github/copilot-cli changelog](https://github.com/github/copilot-cli/blob/main/changelog.md) · [Copilot CLI June 2026 blog post](https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/)
 
 ---
 
@@ -261,15 +262,244 @@ gh copilot auth
 
 ---
 
+## Demo 7 — Security Review (now available to all users)
+
+**What it shows:** `/security-review` was previously behind `--experimental`; as of June 2026 it is available to every paid Copilot subscriber.
+
+### Steps
+
+1. Start a chat session:
+
+   ```bash
+   gh copilot chat
+   ```
+
+2. Open `src/TodoApi/Program.cs` in the editor and attach it:
+
+   ```
+   @src/TodoApi/Program.cs
+   /security-review
+   ```
+
+3. Copilot performs a static security analysis and reports findings grouped by severity (Critical, High, Medium, Low).
+4. For each finding, ask Copilot to fix it:
+
+   ```
+   Fix the High severity finding about missing input validation on the POST /todos endpoint.
+   ```
+
+5. Review the suggested patch and accept it.
+
+> **Key point:** `/security-review` is now a first-class command — no flags needed.
+
+---
+
+## Demo 8 — Worktree Management (`/worktree`)
+
+**What it shows:** Create a git worktree and jump into it without leaving the CLI session — the changelog-confirmed `/worktree` (alias `/move`) command.
+
+### Steps
+
+1. Start a CLI session from the repository root:
+
+   ```bash
+   cd /path/to/cautious-octo-fortnight
+   gh copilot chat
+   ```
+
+2. Create a new worktree for a feature branch:
+
+   ```
+   /worktree feature/search-endpoint
+   ```
+
+   The CLI creates `../cautious-octo-fortnight.worktrees/feature-search-endpoint`, checks out a new branch there, and moves your session into it.
+
+3. Any uncommitted changes from the main working copy are carried along automatically.
+
+4. Ask Copilot to implement the feature:
+
+   ```
+   Add GET /todos/search?q={keyword} — case-insensitive title search. Write the xUnit test.
+   ```
+
+5. When done, switch back to your main session:
+
+   ```
+   /session main
+   ```
+
+6. The worktree branch is ready for a PR — without ever touching your main working copy.
+
+#### Alternative: press `W` from an issue detail
+
+1. Switch to the Issues tab and open any issue.
+2. Press **`W`** — the CLI creates a worktree pre-named after the issue number and moves your session into it immediately.
+
+---
+
+## Demo 9 — Diff View Improvements
+
+**What it shows:** The changelog documents significant `/diff` enhancements: file tree, inline comments, whitespace toggle, and content search.
+
+### Steps
+
+1. After Copilot makes code changes, review them with the enhanced diff view:
+
+   ```
+   /diff
+   ```
+
+2. The diff opens with a **file tree sidebar** on the left. Click any filename to jump to its first change.
+
+3. Press **`w`** to toggle whitespace-only changes on/off — useful when Copilot reformats code.
+
+4. Press **`/`** to open the content search bar inside the diff. Type a term and use **`n`** / **`N`** to jump between matches.
+
+5. Place the cursor on a changed line and press **`c`** to open the **inline comment editor** — add review notes directly in the diff without switching to GitHub.com.
+
+6. Use **stacked diffs** to compare multiple sequential changes:
+
+   ```
+   /diff --stacked
+   ```
+
+---
+
+## Demo 10 — Session Diagnostics (`/diagnose`)
+
+**What it shows:** Analyze session logs to find problems — a new command added in the June 2026 CLI changelog.
+
+### Steps
+
+1. If a session behaves unexpectedly (slow responses, tool errors), run:
+
+   ```
+   /diagnose
+   ```
+
+2. The CLI scans the current session log and reports:
+   - Tool call failures and their error codes.
+   - Slow request latencies (> 5 s highlighted).
+   - Model switches and their triggers.
+   - Content-exclusion events.
+
+3. Ask Copilot to fix the most common issue:
+
+   ```
+   The diagnose output shows repeated content-exclusion events on src/TodoApi/Program.cs.
+   Can you help me adjust the exclusion config?
+   ```
+
+---
+
+## Demo 11 — MCP Registry (`/mcp registry`)
+
+**What it shows:** Browse and install Model Context Protocol servers from the built-in marketplace — added in the June 2026 CLI changelog.
+
+### Steps
+
+1. Open the MCP registry:
+
+   ```
+   /mcp registry
+   ```
+
+2. A searchable list of MCP servers appears (Jira, Datadog, Slack, Docker, AWS …).
+
+3. Search for `dotnet`:
+
+   ```
+   /mcp registry search dotnet
+   ```
+
+4. Install the `.NET diagnostics` server:
+
+   ```
+   /mcp registry install dotnet-diagnostics
+   ```
+
+5. The server is added to your session. Now ask:
+
+   ```
+   Use the dotnet-diagnostics tool to check for memory leaks in the running TodoApi process.
+   ```
+
+6. Copilot calls the MCP tool and returns diagnostics inline.
+
+> **Key point:** MCP servers extend Copilot with any external tool — no custom code required.
+
+---
+
+## Demo 12 — Rewind (`/rewind`)
+
+**What it shows:** Restore only the files Copilot changed — leaving your own edits intact — using the experimental `/rewind` command.
+
+### Steps
+
+1. Enable experimental features:
+
+   ```
+   /experimental
+   ```
+
+2. Let Copilot make some changes, then decide you want to roll back:
+
+   ```
+   /rewind
+   ```
+
+3. Choose the rewind mode:
+   - **Conversation only** — undo the chat context but keep file changes.
+   - **Conversation + files** — revert files to their state before the turn, your own edits are preserved.
+
+4. Confirm the operation. Copilot shows exactly which files will be restored.
+
+> **Key point:** Unlike `git checkout`, `/rewind` is Copilot-change aware — it only touches what the agent wrote.
+
+---
+
+## Demo 13 — Settings Dialog (`/settings`)
+
+**What it shows:** Browse and edit all user settings interactively from one screen — no JSON editing needed.
+
+### Steps
+
+1. Open the settings dialog:
+
+   ```
+   /settings
+   ```
+
+2. Navigate with arrow keys through categories: **Appearance**, **Models**, **Agents**, **MCP**, **Billing**, **Accessibility**.
+
+3. Change the default model:
+   - Navigate to **Models → Default model** → press **Enter** → select `polaris-preview`.
+
+4. Enable the rubber-duck complementary model strategy:
+   - Navigate to **Agents → Rubber Duck → Complementary model** → toggle **On** → select `gpt-5-mini`.
+
+5. Save with **Ctrl+S** or the **Save** button — changes take effect immediately without restarting.
+
+---
+
 ## Quick-reference cheat sheet
 
 | Command | Description |
 |---------|-------------|
-| `/experimental` | Enable new tab-based terminal UI |
+| `/experimental` | Enable experimental features |
 | `/voice` | Enable local voice input |
 | `/rubber-duck` | Cross-model review of last response |
-| `/every <interval>` | Schedule a recurring prompt |
+| `/security-review` | Static security analysis (all users, no flag needed) |
+| `/worktree [branch]` | Create git worktree and switch into it |
+| `/rewind` | Restore files Copilot changed (experimental) |
+| `/diff` | Enhanced diff with file tree, inline comments, search |
+| `/diagnose` | Analyze session logs for problems |
+| `/settings` | Interactive settings dialog |
+| `/mcp registry` | Browse and install MCP servers |
+| `/every <interval>` | Schedule a recurring prompt (natural language OK) |
 | `/after <delay>` | Schedule a one-shot delayed prompt |
+| `/loop` | Alias for `/every` |
 | `/schedules` | List active schedules |
 | `/cancel <id>` | Cancel a schedule |
 | `/chronicle [today\|standup]` | Session history and summaries |
@@ -279,3 +509,6 @@ gh copilot auth
 | `/issues` | Switch to Issues tab |
 | `/prs` | Switch to Pull Requests tab |
 | `/gists` | Switch to Gists tab |
+| `/fork` / `/branch` | Create a fork / branch |
+| `W` (in issue/PR) | Create worktree for that issue/PR |
+
