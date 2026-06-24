@@ -10,14 +10,14 @@
 
 | Requirement | Notes |
 |-------------|-------|
-| GitHub Copilot App | [Download](https://github.com/features/copilot/copilot-app) — Windows, macOS, Linux |
-| GitHub Copilot subscription | Pro / Pro+ / Business / Enterprise (technical preview) |
+| GitHub Copilot App | [Download](https://github.com/github/app) — Windows, macOS, Linux |
+| GitHub Copilot subscription | Pro / Pro+ / Business / Enterprise (GA) |
 | .NET SDK | 10.0 |
 | Git | ≥ 2.45 (worktree support) |
 
 ### Install and sign in
 
-1. Download the Copilot App from [github.com/features/copilot/copilot-app](https://github.com/features/copilot/copilot-app).
+1. Download the Copilot App from [github.com/github/app](https://github.com/github/app).
 2. Install it (`.exe` / `.dmg` / `.AppImage`).
 3. Sign in with your GitHub account.
 4. Grant access to this repository (`sujithq/cautious-octo-fortnight`).

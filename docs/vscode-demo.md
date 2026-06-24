@@ -10,7 +10,7 @@
 
 | Requirement | Version |
 |-------------|---------|
-| Visual Studio Code | ≥ 1.109 |
+| Visual Studio Code | ≥ 1.125 |
 | GitHub Copilot Chat extension (`github.copilot-chat`) | Latest (auto-updated; `github.copilot` is deprecated) |
 | GitHub Copilot subscription | Pro / Pro+ / Business / Enterprise |
 | .NET SDK | 10.0 |
@@ -67,7 +67,7 @@ This demo has moved to [docs/github.com.md](docs/github.com.md) and was updated 
 
 ---
 
-## Demo 3 — Remote Agents over SSH / Dev Tunnels
+## Demo 3 — Remote Agents over SSH / Dev Tunnels (Skip)
 
 **What it shows:** Run an agent session on a remote machine while working on a low-powered laptop.
 
@@ -94,10 +94,11 @@ This demo has moved to [docs/github.com.md](docs/github.com.md) and was updated 
    ```bash
    dotnet restore cautious-octo-fortnight.sln
    dotnet build cautious-octo-fortnight.sln
-   cd src/TodoApi
-   dotnet run
    ```
-2. Open the Command Palette → **`Simple Browser: Show`** → enter `https://localhost:5001/openapi/v1.json`.
+   Then open **Run and Debug** (`Ctrl+Shift+D`) and start the TodoApi debug profile (for example **C#: TodoApi** or **.NET Launch (web)**).
+2. Open the Command Palette → **`Simple Browser: Show`** → enter the OpenAPI URL shown by the app at startup (for example `http://localhost:5000/openapi/v1.json` or `https://localhost:5001/openapi/v1.json`).
+   - If the command is missing, enable the built-in extension **Simple Browser** (`ms-vscode.simple-browser`) from **Extensions: Show Built-in Extensions**.
+   - Fallback: open the same URL in your system browser.
 3. Open `Program.cs` and set a breakpoint on the `MapGet("/todos", ...)` lambda.
 4. In Copilot Chat (Agent Mode), prompt:
    ```
@@ -163,16 +164,18 @@ This demo has moved to [docs/github.com.md](docs/github.com.md) and was updated 
 
 ## Demo 7 — Agent Skills Management
 
-**What it shows:** The new Skills panel lets you discover, enable, disable, edit, and navigate all Copilot agent skills in the workspace.
+**What it shows:** Manage Agent Skills from the Agent Customizations editor, then invoke skills with slash commands.
 
 ### Steps
 
-1. Open the Command Palette → **`GitHub Copilot: Open Agent Skills`**.
-2. Browse the skills list — e.g. `runTests`, `openBrowser`, `createPullRequest`, `searchCode`.
-3. Click a skill to see its definition (a Markdown file with YAML frontmatter).
-4. Disable a skill you don't want agents to use (e.g. `deleteFile`) — toggle it off.
-5. Click **+ New Skill** → enter a name and description → VS Code creates a `.github/agents/<skill>.md` stub.
-6. Re-open Agent Mode and run a task — the agent only uses the skills you have enabled.
+1. Open the Command Palette and run **`Chat: Open Customizations`**.
+2. In the Agent Customizations editor, open the **Skills** tab.
+3. Browse project, personal, and extension-contributed skills; open one to inspect its `SKILL.md` frontmatter and instructions.
+4. Create a workspace skill from the dropdown (**New Skill (Workspace)**). VS Code creates a skill folder with `SKILL.md` under `.github/skills/`.
+5. Control skill visibility/invocation via frontmatter:
+   - `user-invocable: false` hides it from the `/` menu.
+   - `disable-model-invocation: true` prevents automatic model loading.
+6. In chat, type `/` and invoke your skill (for example `/my-skill`) to verify it is available and behaves as expected.
 
 ---
 

@@ -34,8 +34,8 @@
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 - GitHub Copilot subscription (Pro / Pro+ / Business / Enterprise)
 - VS Code ≥ 1.109 with the **GitHub Copilot Chat** extension (`github.copilot-chat`; `github.copilot` is deprecated)
-- GitHub CLI ≥ 2.72 (`gh` with Copilot extension: `gh extension install github/gh-copilot`)
-- [GitHub Copilot App](https://github.com/features/copilot/copilot-app) (technical preview)
+- GitHub Copilot CLI (standalone `copilot` command; see https://github.com/github/copilot-cli)
+- [GitHub Copilot App](https://github.com/github/app) (generally available)
 
 ### Restore dependencies
 

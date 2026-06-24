@@ -10,8 +10,8 @@
 
 | Requirement | Notes |
 |-------------|-------|
-| GitHub CLI | ≥ 2.72 — `gh --version` |
-| gh-copilot extension | `gh extension install github/gh-copilot` |
+| GitHub Copilot CLI | Latest stable — `copilot --version` |
+| GitHub CLI (optional) | `gh --version` |
 | GitHub Copilot subscription | Pro / Pro+ / Business / Enterprise |
 | .NET SDK | 10.0 |
 | Microphone (optional) | Required for voice input demo |
@@ -19,15 +19,15 @@
 ### Verify installation
 
 ```bash
-gh copilot --version
-# github.com/github/gh-copilot v2.x.x
+copilot --version
 ```
 
 ### Authenticate
 
 ```bash
+copilot login
+# Optional if you also use gh directly:
 gh auth login
-gh copilot auth
 ```
 
 ---
@@ -38,11 +38,10 @@ gh copilot auth
 
 ### Steps
 
-1. Launch Copilot CLI in experimental UI mode:
+1. Launch Copilot CLI:
 
    ```bash
-   gh copilot chat
-   /experimental
+   copilot
    ```
 
 2. Notice the **tab bar** at the top of the interface:
@@ -87,7 +86,7 @@ gh copilot auth
 
 ### Steps
 
-1. Inside `gh copilot chat`, enable voice:
+1. Inside `copilot`, enable voice:
 
    ```
    /voice
@@ -117,7 +116,7 @@ gh copilot auth
 
 ### Steps
 
-1. In `gh copilot chat`, ask Copilot to generate something non-trivial:
+1. In `copilot`, ask Copilot to generate something non-trivial:
 
    ```
    Write a middleware for the TodoApi that rate-limits requests to 60 per minute per IP address.
@@ -154,7 +153,7 @@ gh copilot auth
 
 #### Recurring task
 
-1. In `gh copilot chat`, schedule a daily build-health check:
+1. In `copilot`, schedule a daily build-health check:
 
    ```
    /every 1h
@@ -271,7 +270,7 @@ gh copilot auth
 1. Start a chat session:
 
    ```bash
-   gh copilot chat
+   copilot
    ```
 
 2. Open `src/TodoApi/Program.cs` in the editor and attach it:
@@ -304,7 +303,7 @@ gh copilot auth
 
    ```bash
    cd /path/to/cautious-octo-fortnight
-   gh copilot chat
+   copilot
    ```
 
 2. Create a new worktree for a feature branch:
