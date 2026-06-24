@@ -54,8 +54,9 @@ dotnet build cautious-octo-fortnight.sln
 ```bash
 cd src/TodoApi
 dotnet run
-# → https://localhost:5001
-# → OpenAPI UI at https://localhost:5001/openapi/v1.json
+# check port and protocol
+# → http(s)://localhost:5000
+# → OpenAPI UI at http(s)://localhost:5000/openapi/v1.json
 ```
 
 ### Run the tests
