@@ -186,6 +186,7 @@
 3. Run the sample skill host:
 
    ```bash
+   dotnet restore
    dotnet run
    # Listening on http://localhost:6789
    ```

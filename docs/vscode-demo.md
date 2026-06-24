@@ -133,6 +133,8 @@
 
 1. Start the API in debug mode:
    ```bash
+   dotnet restore cautious-octo-fortnight.sln
+   dotnet build cautious-octo-fortnight.sln
    cd src/TodoApi
    dotnet run
    ```

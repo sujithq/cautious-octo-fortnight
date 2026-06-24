@@ -37,6 +37,18 @@
 - GitHub CLI ≥ 2.72 (`gh` with Copilot extension: `gh extension install github/gh-copilot`)
 - [GitHub Copilot App](https://github.com/features/copilot/copilot-app) (technical preview)
 
+### Restore dependencies
+
+```bash
+dotnet restore cautious-octo-fortnight.sln
+```
+
+### Build the solution
+
+```bash
+dotnet build cautious-octo-fortnight.sln
+```
+
 ### Run the sample API
 
 ```bash
