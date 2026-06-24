@@ -4,13 +4,14 @@
 
 ## What's new since Build 2026?
 
-| Area | Headline feature |
-|------|-----------------|
-| **VS Code** | Multi-agent orchestration, remote agents, nested sub-agents, integrated browser debugger |
-| **CLI** | Rubber Duck cross-model review, voice input, prompt scheduling, redesigned terminal UI |
-| **App** | Agent-native desktop (My Work dashboard, Canvas, Agent Merge, isolated git worktrees) |
-| **Models** | Project Polaris (Microsoft in-house model, replacing GPT-4 Turbo from August 2026) |
-| **SDK** | Generally available in Node.js, Python, Go, .NET, Rust, Java |
+| Area | Headline features |
+|------|------------------|
+| **VS Code** | Multi-agent orchestration · Plan Agent · Skills Management panel · Context usage visualisation · Language Models editor (BYOK) · Remote agents · Integrated browser debugger · Multi-file change diff |
+| **CLI** | Rubber Duck cross-model review · Voice input · `/security-review` (all users) · `/worktree` · `/rewind` · `/diff` file tree + search · `/settings` dialog · `/diagnose` · MCP registry · Natural-language scheduling |
+| **App** | Agent-native desktop (GA Jun 17 2026) · My Work dashboard · Canvas · Agent Merge · Cloud Automations · BYOK models · Plugin Marketplace · Isolated git worktrees · Sandbox mode |
+| **Models** | Project Polaris (Microsoft in-house, replacing GPT-4 Turbo, Aug 2026) · Claude Fable 5 · Gemini 3.5 Flash |
+| **SDK** | Generally available in Node.js, Python, Go, .NET, Rust, Java — with OpenTelemetry tracing |
+| **Billing** | Usage-based AI Credits model (Jun 1 2026) · User-level budget controls · Copilot Max plan |
 
 ## Repository structure
 
@@ -58,10 +59,16 @@ dotnet test
 | 🖥️ VS Code | [docs/vscode-demo.md](docs/vscode-demo.md) |
 | 💻 CLI | [docs/cli-demo.md](docs/cli-demo.md) |
 | 📱 App | [docs/app-demo.md](docs/app-demo.md) |
+| 📋 Changelog summary | [docs/changelog-summary.md](docs/changelog-summary.md) |
 
 ## References
 
 - [GitHub Blog — Copilot App announcement](https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/)
+- [Copilot App GA changelog (Jun 17 2026)](https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/)
 - [VS Code May 2026 release notes](https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/)
-- [Copilot CLI changelog (June 2026)](https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/)
-- [Copilot SDK GA announcement](https://github.blog/changelog/2026-06-02-expanded-technical-preview-availability-for-the-github-copilot-app/)
+- [VS Code 1.125 release notes](https://code.visualstudio.com/updates)
+- [Copilot CLI changelog (Jun 2 2026)](https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/)
+- [github/copilot-cli full changelog](https://github.com/github/copilot-cli/blob/main/changelog.md)
+- [Copilot SDK GA (Jun 2 2026)](https://github.blog/changelog/2026-06-02-copilot-sdk-is-now-generally-available/)
+- [Updates to Copilot billing and plans (Jun 1 2026)](https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/)
+- [VS Code March 2026 releases](https://github.blog/changelog/2026-04-08-github-copilot-in-visual-studio-code-march-releases/)
