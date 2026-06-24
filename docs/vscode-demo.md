@@ -11,7 +11,7 @@
 | Requirement | Version |
 |-------------|---------|
 | Visual Studio Code | ≥ 1.109 |
-| GitHub Copilot extension | Latest (auto-updated) |
+| GitHub Copilot Chat extension (`github.copilot-chat`) | Latest (auto-updated; `github.copilot` is deprecated) |
 | GitHub Copilot subscription | Pro / Pro+ / Business / Enterprise |
 | .NET SDK | 10.0 |
 | Node.js (optional, for MCP servers) | ≥ 22 LTS |
