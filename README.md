@@ -71,6 +71,7 @@ dotnet test
 |----------|-------|
 | 🖥️ VS Code | [docs/vscode-demo.md](docs/vscode-demo.md) |
 | 💻 CLI | [docs/cli-demo.md](docs/cli-demo.md) |
+| 🌐 GitHub.com | [docs/github.com.md](docs/github.com.md) |
 | 📱 App | [docs/app-demo.md](docs/app-demo.md) |
 | 📋 Changelog summary | [docs/changelog-summary.md](docs/changelog-summary.md) |
 

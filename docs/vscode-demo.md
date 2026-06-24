@@ -59,56 +59,15 @@
 
 ---
 
-## Demo 2 — Multi-Agent Orchestration (Agent HQ)
+## Demo 2 — GitHub.com Cloud Agent (Moved)
 
-**What it shows:** Multiple specialized agents work in parallel on the same codebase without conflicts, each in an isolated git worktree.
+**What it shows:** GitHub.com cloud-agent workflows (assign issue, start browser sessions, iterate in PRs).
 
-### Steps
-
-1. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-2. Run **`GitHub Copilot: Open Agent HQ`**.
-3. The Agent HQ sidebar shows active, queued, and idle agents.
-4. Click **[+ New Agent]** → choose **Background Agent** → enter:
-
-   ```
-   Refactor all magic numbers in Program.cs into named constants at the top of the file.
-   ```
-
-5. Click **[+ New Agent]** again → choose another **Background Agent** → enter:
-
-   ```
-   Add XML/OpenAPI summary comments to every endpoint in Program.cs.
-   ```
-
-6. Both agents run simultaneously in separate worktrees (visible in the Agent HQ status cards).
-7. When each agent finishes, click **Review Changes** on its card.
-8. VS Code shows a diff per worktree — cherry-pick or merge as needed.
-
-> **Key point:** Background agents never touch your working copy; they operate in isolated git branches you review before merging.
+This demo has moved to [docs/github.com.md](docs/github.com.md) and was updated to match the latest GitHub Docs flow.
 
 ---
 
-## Demo 3 — Cloud Coding Agent (Issue → Pull Request)
-
-**What it shows:** Assign a GitHub Issue to Copilot and it autonomously creates a pull request with a complete implementation.
-
-### Steps
-
-1. In GitHub.com, open an Issue in this repository, e.g.:
-   > _"Add a PATCH /todos/{id}/complete endpoint that marks a todo as complete."_
-2. On the right sidebar, assign the issue to **Copilot** (it appears as an assignee option).
-3. Copilot spins up a cloud agent backed by GitHub Actions.
-4. After a few minutes, a **draft pull request** appears in the repository.
-5. In VS Code, open the PR with **GitHub Pull Requests** extension.
-6. Review the diff; leave review comments if changes are needed.
-7. Copilot reads your review comments and pushes follow-up commits automatically.
-8. Approve and merge when satisfied.
-
-> **Key point:** The entire issue-to-PR cycle requires zero manual coding; you only review.
-
----
-
-## Demo 4 — Remote Agents over SSH / Dev Tunnels
+## Demo 3 — Remote Agents over SSH / Dev Tunnels
 
 **What it shows:** Run an agent session on a remote machine while working on a low-powered laptop.
 
@@ -125,7 +84,7 @@
 
 ---
 
-## Demo 5 — Integrated Browser Debugger
+## Demo 4 — Integrated Browser Debugger
 
 **What it shows:** Debug the running TodoApi inside VS Code's embedded browser with breakpoints.
 
@@ -148,7 +107,7 @@
 
 ---
 
-## Demo 6 — Custom Copilot Instructions
+## Demo 5 — Custom Copilot Instructions
 
 **What it shows:** `.github/copilot-instructions.md` personalizes every agent session for this project.
 
@@ -167,7 +126,7 @@
 
 ---
 
-## Demo 7 — Plan Agent (Plan before you code)
+## Demo 6 — Plan Agent (Plan before you code)
 
 **What it shows:** Collaborate with Copilot on a written implementation plan _before_ any code is generated — introduced in the June 2026 changelog.
 
@@ -202,7 +161,7 @@
 
 ---
 
-## Demo 8 — Agent Skills Management
+## Demo 7 — Agent Skills Management
 
 **What it shows:** The new Skills panel lets you discover, enable, disable, edit, and navigate all Copilot agent skills in the workspace.
 
@@ -217,7 +176,7 @@
 
 ---
 
-## Demo 9 — Context Usage Visualisation
+## Demo 8 — Context Usage Visualisation
 
 **What it shows:** A live indicator of how much of the context window is consumed by the current conversation, with a one-click summarisation to recover space.
 
@@ -232,7 +191,7 @@
 
 ---
 
-## Demo 10 — Language Models Editor (BYOK)
+## Demo 9 — Language Models Editor (BYOK)
 
 **What it shows:** Install additional model providers or use your own API key (BYOK) directly from VS Code, without leaving the editor. Introduced in VS Code 1.125.
 
@@ -249,7 +208,7 @@
 
 ---
 
-## Demo 11 — Multi-file Change Diff & Accept/Reject
+## Demo 10 — Multi-file Change Diff & Accept/Reject
 
 **What it shows:** After an agent edits multiple files, review all changes in a consolidated diff before accepting.
 
