@@ -130,8 +130,7 @@ gh auth login
    ```
 
 3. A second model (different AI family) critiques the generated code — for example:
-   - *"The in-memory dictionary won't work in a multi-instance deployment."*
-   - *"The sliding window logic has an off-by-one in the expiry check."*
+/rubber
 
 4. Ask Copilot to incorporate the feedback:
 
@@ -392,39 +391,51 @@ gh auth login
 
 ---
 
-## Demo 11 — MCP Registry (`/mcp registry`)
+## Demo 11 — MCP Setup (deterministic flow)
 
-**What it shows:** Browse and install Model Context Protocol servers from the built-in marketplace — added in the June 2026 CLI changelog.
+**What it shows:** Configure and verify MCP servers using stable `copilot mcp` commands that work across CLI builds.
 
 ### Steps
 
-1. Open the MCP registry:
+1. List currently configured MCP servers (stable command):
 
-   ```
-   /mcp registry
-   ```
-
-2. A searchable list of MCP servers appears (Jira, Datadog, Slack, Docker, AWS …).
-
-3. Search for `dotnet`:
-
-   ```
-   /mcp registry search dotnet
+   ```bash
+   copilot mcp list
    ```
 
-4. Install the `.NET diagnostics` server:
+2. Verify a specific server (example: installed GitHub MCP server):
 
-   ```
-   /mcp registry install dotnet-diagnostics
-   ```
-
-5. The server is added to your session. Now ask:
-
-   ```
-   Use the dotnet-diagnostics tool to check for memory leaks in the running TodoApi process.
+   ```bash
+   copilot mcp get io.github.github/github-mcp-server
    ```
 
-6. Copilot calls the MCP tool and returns diagnostics inline.
+   Example expected fields:
+   - `Type: http`
+   - `URL: https://api.githubcopilot.com/mcp/`
+   - `Tools: * (all)`
+
+3. Add a server manually (stable command pattern):
+
+   ```bash
+   copilot mcp add <server-name> <url-or-command-and-args>
+   ```
+
+   Examples:
+
+   ```bash
+   copilot mcp add docs-mcp https://example.com/mcp
+   copilot mcp add local-mcp npx -y your-mcp-package
+   ```
+
+4. Start `copilot` and ask Copilot to use a tool from the installed server:
+
+   ```
+   List open issues in sujithq/cautious-octo-fortnight and summarize the top 3.
+   ```
+
+5. Copilot calls MCP tools and returns results inline.
+
+> Optional: some environments expose registry browsing commands such as `/mcp search`, but registry visibility is policy-dependent and not required for this demo.
 
 > **Key point:** MCP servers extend Copilot with any external tool — no custom code required.
 
@@ -495,7 +506,9 @@ gh auth login
 | `/diff` | Enhanced diff with file tree, inline comments, search |
 | `/diagnose` | Analyze session logs for problems |
 | `/settings` | Interactive settings dialog |
-| `/mcp registry` | Browse and install MCP servers |
+| `copilot mcp list` | List configured MCP servers (stable) |
+| `copilot mcp get <name>` | Show MCP server configuration and status (stable) |
+| `copilot mcp add <name> <url-or-command>` | Add an MCP server (stable) |
 | `/every <interval>` | Schedule a recurring prompt (natural language OK) |
 | `/after <delay>` | Schedule a one-shot delayed prompt |
 | `/loop` | Alias for `/every` |
